@@ -144,8 +144,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5377358, g: 0.07863118, b: 0.096460305, a: 1}
-      key1: {r: 0.5377358, g: 0.07863118, b: 0.096460305, a: 1}
+      key0: {r: 0.6981132, g: 0, b: 0.0072858827, a: 1}
+      key1: {r: 0.6981132, g: 0, b: 0.0072858827, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6929894236002078856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 0.16, z: 0}
+  m_LocalPosition: {x: -0.1, y: 0.16, z: -0.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -406,8 +406,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.19215685, b: 0.4570501, a: 1}
-      key1: {r: 1, g: 0, b: 0.3056655, a: 1}
+      key0: {r: 1, g: 0.36320752, b: 0.47144195, a: 1}
+      key1: {r: 1, g: 0.09019607, b: 0.3344349, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
