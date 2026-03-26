@@ -6,7 +6,7 @@ namespace Platformer
     [System.Serializable]
     public struct Hit : IEcsComponent
     {
-        public GameObject first;
-        public GameObject other;
+        public GameObject Target;
+        public GameObject Other;
     }
 }

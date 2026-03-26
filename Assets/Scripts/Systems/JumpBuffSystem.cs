@@ -11,25 +11,26 @@ namespace Platformer
             public EcsPool<JumpBuff> jumpBuffs = Inc;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
 
         public void Run()
         {
-            foreach (var entity in _world.Where(out Aspect aspect))
+            foreach (var e in _world.Where(out Aspect a))
             {
-                ref var playerComponent = ref aspect.players.Get(entity);
-                ref var jumpBuffComponent = ref aspect.jumpBuffs.Get(entity);
+                ref var player = ref a.players.Get(e);
+                ref var jumpBuff = ref a.jumpBuffs.Get(e);
 
-                jumpBuffComponent.timer -= Time.deltaTime;
+                jumpBuff.Timer -= Time.deltaTime;
 
-                if (jumpBuffComponent.timer <= 0)
+                if (jumpBuff.Timer <= 0)
                 {
-                    playerComponent.playerJumpForce /= 2f;
-                    aspect.jumpBuffs.Del(entity);
+                    player.JumpForce /= 2f;
+                    a.jumpBuffs.Del(e);
                 }
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
     }
 
 }

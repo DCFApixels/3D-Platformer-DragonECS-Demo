@@ -7,22 +7,23 @@ namespace Platformer
     {
         class Aspect : EcsAspect
         {
-            public EcsPool<Dangerous> dangerouses = Inc;
+            public EcsPool<Dangerous> Dangerouses = Inc;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
 
         public void Run()
         {
-            foreach (var entity in _world.Where(out Aspect aspect))
+            foreach (var e in _world.Where(out Aspect a))
             {
-                ref var dangerousComponent = ref aspect.dangerouses.Get(entity);
-                Vector3 pos1 = dangerousComponent.pointA;
-                Vector3 pos2 = dangerousComponent.pointB;
+                ref var dangerous = ref a.Dangerouses[e];
+                Vector3 pos1 = dangerous.PointA;
+                Vector3 pos2 = dangerous.PointB;
 
-                dangerousComponent.obstacleTransform.localPosition = Vector3.Lerp(pos1, pos2, Mathf.PingPong(Time.time, 1.0f));
+                dangerous.ObstacleTransform.localPosition = Vector3.Lerp(pos1, pos2, Mathf.PingPong(Time.time, 1.0f));
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
     }
 }

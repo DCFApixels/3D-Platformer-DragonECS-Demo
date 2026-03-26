@@ -8,28 +8,29 @@ namespace Platformer
     {
         class Aspect : EcsAspect
         {
-            public EcsPool<Player> players = Inc;
-            public EcsPool<SpeedBuff> speedBuffs = Inc;
+            public EcsPool<Player> Players = Inc;
+            public EcsPool<SpeedBuff> SpeedBuffs = Inc;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
 
         public void Run()
         {
-            foreach (var entity in _world.Where(out Aspect aspect))
+            foreach (var e in _world.Where(out Aspect a))
             {
-                ref var playerComponent = ref aspect.players.Get(entity);
-                ref var speedBuffComponent = ref aspect.speedBuffs.Get(entity);
+                ref var player = ref a.Players[e];
+                ref var speedBuff = ref a.SpeedBuffs[e];
 
-                speedBuffComponent.timer -= Time.deltaTime;
+                speedBuff.Timer -= Time.deltaTime;
 
-                if (speedBuffComponent.timer <= 0)
+                if (speedBuff.Timer <= 0)
                 {
-                    playerComponent.playerSpeed /= 2f;
-                    aspect.speedBuffs.Del(entity);
+                    player.Speed /= 2f;
+                    a.SpeedBuffs.Del(e);
                 }
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
     }
 }

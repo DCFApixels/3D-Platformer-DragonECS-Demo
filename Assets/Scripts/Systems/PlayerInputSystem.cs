@@ -7,35 +7,36 @@ namespace Platformer
     {
         class Aspect : EcsAspect
         {
-            public EcsPool<PlayerInput> playerInputs = Inc;
-            public EcsTagPool<TryJump> tryJumps = Opt;
+            public EcsPool<PlayerInput> PlayerInputs = Inc;
+            public EcsTagPool<TryJump> TryJumps = Opt;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
-        public void Inject(GameData obj) => _gameData = obj;
         GameData _gameData;
 
         public void Run()
         {
 
-            foreach (var entity in _world.Where(out Aspect aspect))
+            foreach (var e in _world.Where(out Aspect a))
             {
-                ref var playerInputComponent = ref aspect.playerInputs.Get(entity);
+                ref var playerInput = ref a.PlayerInputs[e];
 
-                playerInputComponent.moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
+                playerInput.MoveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     var tryJump = _world.NewEntity();
-                    aspect.tryJumps.Add(tryJump);
+                    a.TryJumps.Add(tryJump);
                 }
 
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    _gameData.sceneService.ReloadScene();
+                    _gameData.S.ReloadScene();
                 }
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
+        public void Inject(GameData obj) => _gameData = obj;
     }
 }

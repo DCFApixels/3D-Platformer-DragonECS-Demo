@@ -7,34 +7,35 @@ namespace Platformer
     {
         class PlayerAspect : EcsAspect
         {
-            public EcsPool<Player> players = Inc;
+            public EcsPool<Player> Players = Inc;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
-        public void Inject(GameData obj) => _gameData = obj;
         GameData _gameData;
 
         public void Init()
         {
-            var playerEntity = _world.NewEntity();
+            var playerE = _world.NewEntity();
 
             var playerPool = _world.GetPool<Player>();
-            playerPool.Add(playerEntity);
-            ref var playerComponent = ref playerPool.Get(playerEntity);
+            playerPool.Add(playerE);
+            ref var player = ref playerPool.Get(playerE);
             var playerInputPool = _world.GetPool<PlayerInput>();
-            playerInputPool.Add(playerEntity);
-            ref var playerInputComponent = ref playerInputPool.Get(playerEntity);
+            playerInputPool.Add(playerE);
+            ref var playerInput = ref playerInputPool.Get(playerE);
 
             var playerGO = GameObject.FindGameObjectWithTag("Player");
             playerGO.GetComponentInChildren<GroundCheckerView>().groundedPool = _world.GetPool<IsGrounded>();
-            playerGO.GetComponentInChildren<GroundCheckerView>().playerEntity = playerEntity;
+            playerGO.GetComponentInChildren<GroundCheckerView>().playerEntity = playerE;
             playerGO.GetComponentInChildren<CollisionCheckerView>().ecsWorld = _world;
-            playerComponent.playerSpeed = _gameData.configuration.playerSpeed;
-            playerComponent.playerTransform = playerGO.transform;
-            playerComponent.playerJumpForce = _gameData.configuration.playerJumpForce;
-            playerComponent.playerCollider = playerGO.GetComponent<CapsuleCollider>();
-            playerComponent.playerRB = playerGO.GetComponent<Rigidbody>();
+            player.Speed = _gameData.C.playerSpeed;
+            player.Transform = playerGO.transform;
+            player.JumpForce = _gameData.C.playerJumpForce;
+            player.Collider = playerGO.GetComponent<CapsuleCollider>();
+            player.Rigidbody = playerGO.GetComponent<Rigidbody>();
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
+        public void Inject(GameData obj) => _gameData = obj;
     }
 }

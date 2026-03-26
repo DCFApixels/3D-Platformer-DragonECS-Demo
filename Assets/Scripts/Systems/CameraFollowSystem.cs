@@ -7,48 +7,49 @@ namespace Platformer
     {
         class CameraAspect : EcsAspect
         {
-            public EcsPool<Camera> cameras = Inc;
+            public EcsPool<CameraController> CameraControllers = Inc;
         }
         class PlayerAspect : EcsAspect
         {
-            public EcsPool<Player> players = Inc;
+            public EcsPool<Player> Players = Inc;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
-        public void Inject(GameData obj) => _gameData = obj;
         GameData _gameData;
 
-        private int cameraEntity;
+        private entlong cameraEntity;
 
         public void Init()
         {
             var cameraEntity = _world.NewEntity();
             var cameraAspect = _world.GetAspect<CameraAspect>();
-            ref var cameraComponent = ref cameraAspect.cameras.Add(cameraEntity);
+            ref var camera = ref cameraAspect.CameraControllers.Add(cameraEntity);
 
-            cameraComponent.cameraTransform = UnityEngine.Camera.main.transform;
-            cameraComponent.cameraSmoothness = _gameData.configuration.cameraFollowSmoothness;
-            cameraComponent.curVelocity = Vector3.zero;
-            cameraComponent.offset = new Vector3(0f, 1f, -9f);
+            camera.Transform = _gameData.S.Camera.transform;
+            camera.Smoothness = _gameData.C.cameraFollowSmoothness;
+            camera.Velocity = Vector3.zero;
+            camera.Offset = new Vector3(0f, 1f, -9f);
 
-            this.cameraEntity = cameraEntity;
+            this.cameraEntity = (cameraEntity, _world);
         }
 
         public void FixedRun()
         {
             var cameraAspect = _world.GetAspect<CameraAspect>();
-            ref var cameraComponent = ref cameraAspect.cameras.Get(cameraEntity);
+            ref var camera = ref cameraAspect.CameraControllers.Get(cameraEntity.ID);
 
-            foreach (var entity in _world.Where(out PlayerAspect playerAspect))
+            foreach (var e in _world.Where(out PlayerAspect playerA))
             {
-                ref var playerComponent = ref playerAspect.players.Get(entity);
+                ref var player = ref playerA.Players[e];
 
-                Vector3 currentPosition = cameraComponent.cameraTransform.position;
-                Vector3 targetPoint = playerComponent.playerTransform.position + cameraComponent.offset;
+                Vector3 currentPosition = camera.Transform.position;
+                Vector3 targetPoint = player.Transform.position + camera.Offset;
 
-                cameraComponent.cameraTransform.position = Vector3.SmoothDamp(currentPosition, targetPoint, ref cameraComponent.curVelocity, cameraComponent.cameraSmoothness);
+                camera.Transform.position = Vector3.SmoothDamp(currentPosition, targetPoint, ref camera.Velocity, camera.Smoothness);
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
+        public void Inject(GameData obj) => _gameData = obj;
     }
 }

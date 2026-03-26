@@ -6,16 +6,14 @@ namespace Platformer
     {
         class HitAspect : EcsAspect
         {
-            public EcsPool<Hit> hits = Inc;
+            public EcsPool<Hit> Hits = Inc;
         }
         class PlayerAspect : EcsAspect
         {
-            public EcsPool<Player> players = Inc;
+            public EcsPool<Player> Players = Inc;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
-        public void Inject(GameData obj) => _gameData = obj;
         GameData _gameData;
 
         public void Run()
@@ -23,26 +21,29 @@ namespace Platformer
             var playerEs = _world.Where(out PlayerAspect playerAspect);
             foreach (var hitE in _world.Where(out HitAspect hitAspect))
             {
-                ref var hitComponent = ref hitAspect.hits.Get(hitE);
+                ref var hit = ref hitAspect.Hits[hitE];
 
                 foreach (var playerE in playerEs)
                 {
-                    ref var playerComponent = ref playerAspect.players.Get(playerE);
+                    ref var player = ref playerAspect.Players[playerE];
 
-                    if (hitComponent.other.CompareTag(Constants.Tags.CoinTag))
+                    if (hit.Other.CompareTag(Constants.Tags.CoinTag))
                     {
-                        playerComponent.coins += 1;
-                        _gameData.coinCounter.text = playerComponent.coins.ToString();
+                        player.Coins += 1;
+                        _gameData.S.UI.HUDCounter.text = player.Coins.ToString();
                     }
 
-                    if (hitComponent.other.CompareTag(Constants.Tags.BadCoinTag))
+                    if (hit.Other.CompareTag(Constants.Tags.BadCoinTag))
                     {
-                        playerComponent.coins -= 1;
-                        _gameData.coinCounter.text = playerComponent.coins.ToString();
+                        player.Coins -= 1;
+                        _gameData.S.UI.HUDCounter.text = player.Coins.ToString();
                     }
                 }
 
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
+        public void Inject(GameData obj) => _gameData = obj;
     }
 }

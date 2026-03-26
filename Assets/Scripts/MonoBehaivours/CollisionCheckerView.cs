@@ -16,8 +16,8 @@ namespace Platformer
             hitPool.Add(hit);
             ref var hitComponent = ref hitPool.Get(hit);
 
-            hitComponent.first = transform.root.gameObject;
-            hitComponent.other = collision.gameObject;
+            hitComponent.Target = transform.root.gameObject;
+            hitComponent.Other = collision.gameObject;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -33,8 +33,8 @@ namespace Platformer
             hitPool.Add(hit);
             ref var hitComponent = ref hitPool.Get(hit);
 
-            hitComponent.first = transform.root.gameObject;
-            hitComponent.other = other.gameObject;
+            hitComponent.Target = transform.root.gameObject;
+            hitComponent.Other = other.gameObject;
         }
     }
 }

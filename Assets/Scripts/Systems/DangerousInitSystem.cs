@@ -5,7 +5,6 @@ namespace Platformer
 {
     public class DangerousInitSystem : IEcsInit, IEcsInject<EcsDefaultWorld>
     {
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
         public void Init()
         {
@@ -13,15 +12,17 @@ namespace Platformer
 
             foreach (var i in GameObject.FindGameObjectsWithTag(Constants.Tags.DangerousTag))
             {
-                var dangerousEntity = _world.NewEntity();
+                var dangerousE = _world.NewEntity();
 
-                dangerousPool.Add(dangerousEntity);
-                ref var dangerousComponent = ref dangerousPool.Get(dangerousEntity);
+                dangerousPool.Add(dangerousE);
+                ref var dangerous = ref dangerousPool.Get(dangerousE);
 
-                dangerousComponent.obstacleTransform = i.transform;
-                dangerousComponent.pointA = i.transform.Find("A").position;
-                dangerousComponent.pointB = i.transform.Find("B").position;
+                dangerous.ObstacleTransform = i.transform;
+                dangerous.PointA = i.transform.Find("A").position;
+                dangerous.PointB = i.transform.Find("B").position;
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
     }
 }

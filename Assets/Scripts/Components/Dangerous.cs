@@ -6,8 +6,8 @@ namespace Platformer
     [System.Serializable]
     public struct Dangerous : IEcsComponent
     {
-        public Transform obstacleTransform;
-        public Vector3 pointA;
-        public Vector3 pointB;
+        public Transform ObstacleTransform;
+        public Vector3 PointA;
+        public Vector3 PointB;
     }
 }

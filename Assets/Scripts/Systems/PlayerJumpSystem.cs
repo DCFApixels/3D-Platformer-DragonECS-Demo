@@ -8,30 +8,31 @@ namespace Platformer
     {
         class Aspect : EcsAspect
         {
-            public EcsPool<Player> players = Inc;
-            public EcsPool<PlayerInput> playerInputs = Inc;
-            public EcsTagPool<IsGrounded> isGroundeds = Inc;
+            public EcsPool<Player> Players = Inc;
+            public EcsPool<PlayerInput> PlayerInputs = Inc;
+            public EcsTagPool<IsGrounded> IsGroundeds = Inc;
         }
         class TryJumpAspect : EcsAspect
         {
-            public EcsTagPool<TryJump> tryJumps = Inc;
+            public EcsTagPool<TryJump> TryJumps = Inc;
         }
 
-        public void Inject(EcsDefaultWorld obj) => _world = obj;
         EcsDefaultWorld _world;
 
         public void FixedRun()
         {
-            foreach (var tryJumpEntity in _world.Where(out TryJumpAspect tryJumpAspect))
+            foreach (var tryJumpE in _world.Where(out TryJumpAspect tryJumpA))
             {
-                _world.DelEntity(tryJumpEntity);
-                foreach (var playerEntity in _world.Where(out Aspect aspect))
+                _world.DelEntity(tryJumpE);
+                foreach (var playerE in _world.Where(out Aspect a))
                 {
-                    ref var playerComponent = ref aspect.players.Get(playerEntity);
+                    ref var player = ref a.Players.Get(playerE);
 
-                    playerComponent.playerRB.AddForce(Vector3.up * playerComponent.playerJumpForce, ForceMode.VelocityChange);
+                    player.Rigidbody.AddForce(Vector3.up * player.JumpForce, ForceMode.VelocityChange);
                 }
             }
         }
+
+        public void Inject(EcsDefaultWorld obj) => _world = obj;
     }
 }

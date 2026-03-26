@@ -6,6 +6,6 @@ namespace Platformer
     [System.Serializable]
     public struct PlayerInput : IEcsComponent
     {
-        public Vector3 moveInput;
+        public Vector3 MoveInput;
     }
 }

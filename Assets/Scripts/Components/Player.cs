@@ -6,12 +6,12 @@ namespace Platformer
     [System.Serializable]
     public struct Player : IEcsComponent
     {
-        public Transform playerTransform;
-        public Rigidbody playerRB;
-        public CapsuleCollider playerCollider;
-        public Vector3 playerVelocity;
-        public float playerJumpForce;
-        public float playerSpeed;
-        public int coins;
+        public Transform Transform;
+        public Rigidbody Rigidbody;
+        public CapsuleCollider Collider;
+        public Vector3 Velocity;
+        public float JumpForce;
+        public float Speed;
+        public int Coins;
     }
 }
