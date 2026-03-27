@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="600" src="https://github.com/user-attachments/assets/c593dba7-eeaa-4706-a043-946f132f3f83" alt="screenshot">
+  <img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/6aba814d-a70b-432f-a905-84d1b6872581" />
 </div>
 
 # 3D Platformer
@@ -10,5 +10,5 @@ This is a simple example of a 3D platformer on the Unity engine using [DragonECS
 - [DragonECS-Unity](https://github.com/DCFApixels/DragonECS-Unity)
 
 # Screenshots
-![alt text](https://i.ibb.co/hm7Lrm4/Platformer.png)
-![alt text](https://i.ibb.co/ZL7fgrm/Platformer.png)
+<img width="2213" height="1125" alt="image" src="https://github.com/user-attachments/assets/6d37c8ec-31c0-44a5-8315-e76bee2d444e" />
+<img width="2213" height="1125" alt="image" src="https://github.com/user-attachments/assets/32037ab9-c1a3-49f2-8a57-5042ad3bdd88" />
