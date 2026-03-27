@@ -30,7 +30,10 @@ namespace Platformer
                     if (hit.Other.CompareTag(Constants.Tags.WinPointTag))
                     {
                         player.Transform.gameObject.SetActive(false);
-                        _world.DelEntity(playerE);
+                        if (_world.IsUsed(playerE))
+                        {
+                            _world.DelEntity(playerE);
+                        }
                         _gameData.S.UI.WinScreen.gameObject.SetActive(true);
                     }
                 }
