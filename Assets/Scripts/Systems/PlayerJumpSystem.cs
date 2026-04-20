@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Platformer
 {
-    public class PlayerJumpSystem : IEcsFixedRunProcess, IEcsInject<EcsDefaultWorld>
+    public class PlayerJumpSystem : IEcsFixedRun, IEcsInject<EcsDefaultWorld>
     {
         class Aspect : EcsAspect
         {

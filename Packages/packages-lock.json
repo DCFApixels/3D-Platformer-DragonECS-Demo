@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "7a8cbf9f0a7e51f5b932c4db07945a6e2b69c9bd"
+      "hash": "2b50fbdb558a25086ee140480236f5e1d21cbdf8"
     },
     "com.dcfa_pixels.dragonecs-unity": {
       "version": "https://github.com/DCFApixels/DragonECS-Unity.git",
@@ -14,7 +14,7 @@
       "dependencies": {
         "com.dcfa_pixels.dragonecs": "https://github.com/DCFApixels/DragonECS.git"
       },
-      "hash": "9401455046532a002762befea0b11d468855cce3"
+      "hash": "3509552c89bf30b85950f93752a22482575d5819"
     },
     "com.unity.ext.nunit": {
       "version": "1.0.6",

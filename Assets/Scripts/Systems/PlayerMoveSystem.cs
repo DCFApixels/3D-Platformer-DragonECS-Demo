@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Platformer
 {
-    public class PlayerMoveSystem : IEcsFixedRunProcess, IEcsInject<EcsDefaultWorld>
+    public class PlayerMoveSystem : IEcsFixedRun, IEcsInject<EcsDefaultWorld>
     {
         class Aspect : EcsAspect
         {

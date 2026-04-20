@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Platformer
 {
-    public class CameraFollowSystem : IEcsInit, IEcsFixedRunProcess, IEcsInject<EcsDefaultWorld>, IEcsInject<GameData>
+    public class CameraFollowSystem : IEcsInit, IEcsFixedRun, IEcsInject<EcsDefaultWorld>, IEcsInject<GameData>
     {
         class CameraAspect : EcsAspect
         {
