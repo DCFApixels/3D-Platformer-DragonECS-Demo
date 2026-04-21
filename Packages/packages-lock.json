@@ -14,7 +14,7 @@
       "dependencies": {
         "com.dcfa_pixels.dragonecs": "https://github.com/DCFApixels/DragonECS.git"
       },
-      "hash": "3509552c89bf30b85950f93752a22482575d5819"
+      "hash": "7e0343f8d1704d824b5874e861d31f1345b62ba8"
     },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
